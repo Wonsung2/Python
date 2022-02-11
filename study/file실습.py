@@ -13,7 +13,7 @@ def que01() :
 
 
 # caller
-que01()
+# que01()
 
 
 # Que2
@@ -31,7 +31,7 @@ def que02() :
                 cnt += 1
         print('단어의 길이가 10이하인 단어의 갯수 : {}'.format(cnt))
 #caller
-que02()
+# que02()
 
 # zipcode.txt
 # input 함수를 이용해서 동 이름을 입력받아
@@ -41,6 +41,18 @@ que02()
 # startwith() 함수를 이용
 # 예외처리
 def que03() :
-    pass
+    dong = input("동을 입력하세요 예) 개포 : ")
+    try :
+        with open('../data/zipcode.txt' , 'r', encoding='utf-8') as file :
+            line = file.readline()
+            while line :
+                addr_lst = line.split('\t')
+                if addr_lst[3].startswith(dong) :
+                    print(addr_lst)
+                line = file.readline()
+    except Exception as e :
+        print(str(e))
+
+
 #caller
 que03()
