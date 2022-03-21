@@ -1,25 +1,57 @@
 import mpg as m
 from statistics import mean
-
+import pandas as pd
 mpgLst = []
 with open('../data/mpg.txt', 'r', encoding='utf-8') as file :
-    for f in file :
-        print(f)
+    file.readline()
+    line = file.readline()
+    while line != '' :
+        row = line.strip('\n').split(',')
+        mpgLst.append(row)
+        line = file.readline()
 
+# print(type(mpgLst))
+df = pd.DataFrame(mpgLst, columns=['manufacturer','model','displ','year','cyl','trans','drv','cty','hwy','fl','class'])
+
+# print(df.info())
+# print(df.describe(include='all'))
+# print(df)
 # 1. displ(배기량)이 4 이하인 자동차와 5 이상인 자동차 중
-# 어떤 자동차의 hwy(고속도로 연비)가 평균적으로 더 높은지 확인하세요.
-
+# 어떤 자동차의 hwy(고속도로 연비)가 평균적으로 더 높은지 확인하세요.]
+df_1 = df[['displ', 'hwy']].astype(float)
+# print(df_1)
+df_14 = df_1.loc[df_1['displ'] <= 4]
+df_15 = df_1.loc[df_1['displ'] >= 5]
+print(df_14)
+print(df_15)
+df_m1 = df_14['hwy'].mean()
+df_m2 = df_15['hwy'].mean()
+print(df_m1, df_m2)
 # 2. 자동차 제조 회사에 따라 도시 연비가 다른지 알아보려고 한다.
 # "audi"와 "toyota" 중 어느 manufacturer(제조회사)의 cty(도시 연비)가
 # 평균적으로 더 높은지 확인하세요.
-
+df_2 = df[['manufacturer', 'cty']]
+df_a = df_2.loc[df_2['manufacturer'] == 'audi']
+df_t = df_2.loc[df_2['manufacturer'] == 'toyota']
+df_am = df_a['cty'].astype(float).mean()
+df_tm = df_t['cty'].astype(float).mean()
+print(df_am, df_tm)
 # 3. "chevrolet", "ford", "honda" 자동차의 고속도로 연비 평균을 알아보려고 한다.
 # 이 회사들의 데이터를 추출한 후 hwy(고속도로 연비) 평균을 구하세요.
-
+df_3 = df[['manufacturer', 'hwy']]
+df_c = df_3.loc[df_3['manufacturer'] == 'chevrolet']
+df_cm = df_c['hwy'].astype(float).mean()
+df_f = df_3.loc[df_3['manufacturer'] == 'ford']
+df_fm = df_f['hwy'].astype(float).mean()
+df_h = df_3.loc[df_3['manufacturer'] == 'honda']
+df_hm = df_h['hwy'].astype(float).mean()
+print(df_cm, df_fm, df_hm)
 # 4. "audi"에서 생산한 자동차 중에 어떤 자동차 모델의 hwy(고속도로 연비)가
 # 높은지 알아보려고 한다. "audi"에서 생산한 자동차 중 hwy가 1~5위에 해당하는
 # 자동차의 데이터를 출력하세요.
-
+df_4 = df[['manufacturer', 'model', 'hwy']]
+df_4_target = df_4.loc[df['manufacturer'] == 'audi']
+print(df_4_target.sort_values(by='hwy', ascending=False).values[0:5])
 # 5. mpg 데이터는 연비를 나타내는 변수가 2개입니다.
 # 두 변수를 각각 활용하는 대신 하나의 통합 연비 변수를 만들어 사용하려 합니다.
 # 평균 연비 변수는 두 연비(고속도로와 도시)의 평균을 이용합니다.
