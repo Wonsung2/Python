@@ -56,11 +56,20 @@ print(df_4_target.sort_values(by='hwy', ascending=False).values[0:5])
 # 두 변수를 각각 활용하는 대신 하나의 통합 연비 변수를 만들어 사용하려 합니다.
 # 평균 연비 변수는 두 연비(고속도로와 도시)의 평균을 이용합니다.
 # 회사별로 "suv" 자동차의 평균 연비를 구한후 내림차순으로 정렬한 후 1~5위까지 데이터를 출력하세요.
+print(df)
+df_6 = df[['manufacturer', 'cty', 'hwy' ,'class']]
+df_6['mean'] = (df_6['cty'].astype(float) + df_6['hwy'].astype(float))/2
+print(df_6)
+df_6_target = df_6.loc[df_6['class'] == 'suv']
+df_6_target1 = df_6_target[['manufacturer', 'mean']]
+print(df_6_target1.sort_values(by='mean',ascending=False))
 
 # 6. mpg 데이터의 class는 "suv", "compact" 등 자동차의 특징에 따라
 # 일곱 종류로 분류한 변수입니다. 어떤 차종의 도시 연비가 높은지 비교하려 합니다.
 # class별 cty 평균을 구하고 cty 평균이 높은 순으로 정렬해 출력하세요.
-
+df_7 = df[['class', 'cty']]
+df_7_target = df_7.groupby(by='class').mean().sort_values(by='cty',ascending=False)
+print(df_7_target)
 # 7. 어떤 회사 자동차의 hwy(고속도로 연비)가 가장 높은지 알아보려 합니다.
 # hwy(고속도로 연비) 평균이 가장 높은 회사 세 곳을 출력하세요.
 
