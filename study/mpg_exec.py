@@ -78,3 +78,8 @@ print(df_7[:3])
 
 # 8. 어떤 회사에서 "compact" 차종을 가장 많이 생산하는지 알아보려고 합니다.
 # 각 회사별 "compact" 차종 수를 내림차순으로 정렬해 출력하세요.
+df_8 = df[['manufacturer', 'class']]
+df_8_target = df_8.loc[df_8['class'] == 'compact']
+df_8_target_2 = df_8_target.groupby(by='manufacturer').count()
+df_8_target_3 = df_8_target_2.sort_values(by='class', ascending=False)
+print(df_8_target_3)
