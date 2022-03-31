@@ -57,7 +57,7 @@ print(df_4_target.sort_values(by='hwy', ascending=False).values[0:5])
 # 평균 연비 변수는 두 연비(고속도로와 도시)의 평균을 이용합니다.
 # 회사별로 "suv" 자동차의 평균 연비를 구한후 내림차순으로 정렬한 후 1~5위까지 데이터를 출력하세요.
 print(df)
-df_5 = df[['manufacturer', 'cty', 'hwy' ,'class']]
+df_5 = df[['manufacturer', 'cty', 'hwy','class']]
 df_5['mean'] = (df_5['cty'].astype(float) + df_5['hwy'].astype(float))/2
 print(df_5)
 df_5_target = df_5.loc[df_5['class'] == 'suv']
