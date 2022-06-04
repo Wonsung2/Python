@@ -71,7 +71,7 @@ df_6 = df[['class', 'cty']]
 df_6_target = df_6.groupby(by='class').mean().sort_values(by='cty',ascending=False)
 print(df_6_target)
 # 7. 어떤 회사 자동차의 hwy(고속도로 연비)가 가장 높은지 알아보려 합니다.
-# hwy(고속도로 연비) 평균이 가장 높은 회사 세 곳을 출력하세요.
+# hwy(고속도로 연비) 평균이 가장 높은 회사 세 곳을 출력하세요
 df_7 = df[['manufacturer', 'hwy']].sort_values(by='hwy', ascending=False)
 print(df_7[:3])
 
