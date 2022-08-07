@@ -8,7 +8,7 @@
 # # 회문(palindrome)
 # # madam, sos, level, rotator, nurses run
 # # 회문을 검사하는 로직을 생각해 본다면?
-#
+
 # # word = 'madam'
 # # if word == word[::-1] :
 # #     pass
